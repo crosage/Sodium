@@ -3,6 +3,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart' show Icons;
 import 'package:sodium/pages/normal_log_page.dart';
 import 'package:sodium/pages/pnp_entities_page.dart';
+import 'package:sodium/pages/security_log_page.dart';
 
 
 class navigator extends StatefulWidget {
@@ -50,7 +51,7 @@ class navigatorState extends State<navigator> {
           PaneItem(
             icon: const Icon(FluentIcons.disable_updates),
             title: const Text('查看系统安全日志'),
-            body: const Row(),
+            body: SecurityLogPage(),
           ),
         ],
         footerItems: [
@@ -59,25 +60,6 @@ class navigatorState extends State<navigator> {
             title: const Text('Settings'),
             body: Row(),
           ),
-          // PaneItemAction(
-          //   icon: const Icon(FluentIcons.add),
-          //   title: const Text('Add New Item'),
-          //   onTap: () {
-          //     // Your Logic to Add New `NavigationPaneItem`
-          //     items.add(
-          //       PaneItem(
-          //         icon: const Icon(FluentIcons.new_folder),
-          //         title: const Text('New Item'),
-          //         body: const Center(
-          //           child: Text(
-          //             'This is a newly added Item',
-          //           ),
-          //         ),
-          //       ),
-          //     );
-          //     setState(() {});
-          //   },
-          // ),
         ],
       ),
     );
