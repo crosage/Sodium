@@ -1,5 +1,5 @@
 # 获取连接本机设备列表（作业
 
-python处理的相当的慢，待解决
+![image](https://github.com/crosage/Sodium/assets/90540469/a5d222f2-8f27-4a04-9436-c4116bc2e912)
 
-![image](https://github.com/crosage/Sodium/assets/90540469/35c25180-3c42-4bb2-ba60-cfb2e6d60f8c)
+![image](https://github.com/crosage/Sodium/assets/90540469/bd685052-2661-4e31-b09b-1b637d23d4aa)
