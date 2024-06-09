@@ -52,21 +52,21 @@ class _RegisterPageState extends State<RegisterPage> {
                           fontSize: 20,
                           fontWeight: FontWeight.bold)),
                   SizedBox(height: 20),
-                  requiredTextField(
+                  RequiredTextField(
                     controller: _usernameController,
                     width: 300,
                     placeholder: "输入用户名",
                     text: "Username",
                   ),
                   SizedBox(height: 20),
-                  requiredTextField(
+                  RequiredTextField(
                     placeholder: "输入密码",
                     text: "password",
                     width: 300,
                     controller: _passwordController,
                   ),
                   SizedBox(height: 20),
-                  requiredTextField(
+                  RequiredTextField(
                     placeholder: "确认密码",
                     text: "check your password",
                     width: 300,

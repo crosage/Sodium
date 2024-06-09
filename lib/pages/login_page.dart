@@ -1,7 +1,13 @@
+import 'dart:convert';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
+import 'package:provider/provider.dart';
+import 'package:dio/dio.dart';
 import '../component/required_text_field.dart';
+import '../main.dart';
+import '../model/user.dart';
+import '../service/httphelper.dart';
 
 class LoginPage extends StatefulWidget {
   final Function(int) navigateToNewPage;
@@ -12,6 +18,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  HttpHelper httpHelper=HttpHelper();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -46,20 +53,20 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: 60,
                   ),
-                  Text("登录",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold)),
+                  Text("区块链系统-登录",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),),
                   SizedBox(height: 20),
-                  requiredTextField(
+                  RequiredTextField(
                     controller: _usernameController,
                     width: 300,
                     placeholder: "用户名",
                     text: "Username",
                   ),
                   SizedBox(height: 20),
-                  requiredTextField(
+                  RequiredTextField(
                     placeholder: "密码",
                     text: "password",
                     width: 300,
@@ -71,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       FilledButton(
                         child: const Text('登录'),
-                        onPressed: () => debugPrint('pressed button'),
+                        onPressed: () => _login(context),
                       ),
                       SizedBox(width: 30,)
                     ],
@@ -85,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _login(BuildContext context) {
+  void _login(BuildContext context) async{
 
     String username = _usernameController.text;
     String password = _passwordController.text;
@@ -98,15 +105,39 @@ class _LoginPageState extends State<LoginPage> {
       ).show(context);
       return;
     }
+    try{
+      Map<String,dynamic> postData={
+        "username":username,
+        "password":password
+      };
+      Response getResponse= await httpHelper.postRequest(BaseUrl+"/api/user/login",postData);
+      Map<String, dynamic> responseData = jsonDecode(getResponse.toString());
+      if (responseData["code"]==200) {
+        var data = responseData["data"];
+        User now=User.fromJson(data);
+        now.token=data["token"];
+        Provider.of<UserModel>(context, listen: false).updateUser(now);
+        ElegantNotification.success(
+          title: Text("success"),
+          description: Text("登录成功"),
+          animation: AnimationType.fromTop,
+        ).show(context);
+        widget.navigateToNewPage(6);
+      } else {
+        ElegantNotification.error(
+          title: Text("error"),
+          description: Text(responseData["message"]),
+          animation: AnimationType.fromTop,
+        ).show(context);
+      }
 
-    ElegantNotification.success(
-      title: Text("success"),
-      description: Text("登录成功"),
-      animation: AnimationType.fromTop,
-    ).show(context);
-    widget.navigateToNewPage(1);
-    print('用户名: $username');
-    print('密码: $password');
+
+    }catch(e){
+      ElegantNotification.error(
+        title: Text("error"),
+        description: Text(e.toString()),
+        animation: AnimationType.fromTop,
+      ).show(context);
+    }
   }
-
 }

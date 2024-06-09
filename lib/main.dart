@@ -3,7 +3,7 @@ import 'package:web_socket_channel/io.dart';
 import 'dart:convert';
 import 'package:sodium/pages/navigator.dart';
 
-
+final BaseUrl="http://127.0.0.1:23333";
 void main() {
   runApp(MyApp());
 }

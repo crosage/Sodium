@@ -1,12 +1,12 @@
 import 'package:fluent_ui/fluent_ui.dart';
 
-class requiredTextField extends StatelessWidget {
+class RequiredTextField extends StatelessWidget {
   final String placeholder;
   final String text;
   final double width;
   final TextEditingController controller;
 
-  requiredTextField({
+  RequiredTextField({
     Key? key,
     required this.placeholder,
     required this.text,
