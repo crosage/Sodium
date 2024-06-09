@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: 60,
                   ),
-                  Text("区块链系统-登录",
+                  Text("登录",
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 20,
