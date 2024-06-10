@@ -120,15 +120,15 @@ class _LoginPageState extends State<LoginPage> {
         print(responseData);
         // var data = responseData["data"];
 
-        // User now=User.fromJson(data);
-        // now.token=data["token"];
-        // Provider.of<UserModel>(context, listen: false).updateUser(now);
+        User now=User.fromJson(responseData);
+        now.token=responseData["token"];
+        Provider.of<UserModel>(context, listen: false).updateUser(now);
         ElegantNotification.success(
           title: Text("success"),
           description: Text("登录成功"),
           animation: AnimationType.fromTop,
         ).show(context);
-        widget.navigateToNewPage(6);
+        widget.navigateToNewPage(0);
       } else {
         ElegantNotification.error(
           title: Text("error"),
@@ -137,6 +137,7 @@ class _LoginPageState extends State<LoginPage> {
         ).show(context);
       }
     }catch(e){
+      print(e);
       ElegantNotification.error(
         title: Text("error"),
         description: Text(e.toString()),

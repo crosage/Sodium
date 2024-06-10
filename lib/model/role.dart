@@ -10,6 +10,7 @@ class Role {
   Role({required this.id, required this.name, required this.permissions});
 
   factory Role.fromJson(Map<String, dynamic> json) {
+    print("2222222222");
     var permissionsFromJson = json['permissions'] as List;
     List<Permission> permissionList = permissionsFromJson.map((i) => Permission.fromJson(i)).toList();
 

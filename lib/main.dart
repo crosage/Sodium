@@ -1,11 +1,14 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:web_socket_channel/io.dart';
-import 'dart:convert';
+import 'package:provider/provider.dart';
 import 'package:sodium/pages/navigator.dart';
+
+import 'model/user.dart';
 
 final BaseUrl="http://127.0.0.1:23333";
 void main() {
-  runApp(MyApp());
+  runApp(
+      ChangeNotifierProvider(create: (_)=>UserModel(),child: MyApp(),)
+  );
 }
 
 class MyApp extends StatefulWidget {
