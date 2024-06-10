@@ -118,8 +118,6 @@ class _LoginPageState extends State<LoginPage> {
       Map<String, dynamic> responseData = jsonDecode(getResponse.toString());
       if (getResponse.statusCode==200) {
         print(responseData);
-        // var data = responseData["data"];
-
         User now=User.fromJson(responseData);
         now.token=responseData["token"];
         Provider.of<UserModel>(context, listen: false).updateUser(now);

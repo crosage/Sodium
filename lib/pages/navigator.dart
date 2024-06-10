@@ -3,6 +3,7 @@ import 'package:flutter/material.dart' show Icons;
 import 'package:provider/provider.dart';
 import 'package:sodium/pages/user_info_page.dart';
 import '../model/user.dart';
+import 'admin_page.dart';
 import 'login_page.dart';
 import 'register_page.dart';
 import 'normal_log_page.dart';
@@ -27,7 +28,6 @@ class navigatorState extends State<navigator> {
       index = newIndex;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -78,12 +78,11 @@ class navigatorState extends State<navigator> {
             body: Container(
               child: IconButton(
                 icon: Icon(Icons.accessible_forward),
-                onPressed: () {
-                },
+                onPressed: () {},
               ),
             ),
             items: [
-              if (userModel.token=="")
+              if (userModel.token == "")
                 PaneItem(
                   icon: const Icon(FluentIcons.follow_user),
                   title: const Text('登录'),
@@ -91,7 +90,7 @@ class navigatorState extends State<navigator> {
                     navigateToNewPage: handleIndexChanged,
                   ),
                 ),
-              if (userModel.token=="")
+              if (userModel.token == "")
                 PaneItem(
                   icon: const Icon(FluentIcons.add_friend),
                   title: const Text('注册'),
@@ -99,9 +98,10 @@ class navigatorState extends State<navigator> {
                     navigateToNewPage: handleIndexChanged,
                   ),
                 ),
+              if (userModel.token != "")
               PaneItem(
                 icon: const Icon(FluentIcons.account_management),
-                title: const Text('个人信息设置'),
+                title: const Text('角色选择'),
                 body: UserInfoPage(
                   navigateToNewPage: handleIndexChanged,
                 ),
@@ -121,30 +121,32 @@ class navigatorState extends State<navigator> {
             ],
           ),
           PaneItem(
-            icon: const Icon(FluentIcons.admin_a_logo32),
-            title: const Text('管理员界面'),
-            body: const Row(),
-          ),
-          PaneItem(
             icon: const Icon(Icons.article_outlined),
             title: const Text('查看系统一般日志'),
             // infoBadge: const InfoBadge(source: Text('8')),
             body: NormalLogPage(),
-            enabled: userModel.currentRole?.name=="普通员工",
+            enabled: userModel.currentRole?.name == "普通员工",
           ),
           PaneItem(
             icon: const Icon(Icons.security),
             title: const Text('查看系统安全日志'),
             body: SecurityLogPage(),
-            enabled: userModel.currentRole?.name=="系统管理员",
+            enabled: userModel.currentRole?.name == "系统管理员",
           ),
           PaneItem(
             icon: const Icon(Icons.usb),
             title: const Text('查看usb连接情况'),
             // infoBadge: const InfoBadge(source: Text('8')),
             body: PnPEntitiesPage(),
-            enabled: userModel.currentRole?.name=="审计人员",
+            enabled: userModel.currentRole?.name == "审计人员",
           ),
+          PaneItem(
+              icon: const Icon(FluentIcons.admin_a_logo32),
+              title: Text('管理员页面'),
+              body: AdminPage(
+                navigateToNewPage: handleIndexChanged,
+              ),
+              enabled: userModel.currentRole?.name == "系统管理员"),
         ],
       ),
     );

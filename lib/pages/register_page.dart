@@ -51,7 +51,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   SizedBox(
                     height: 60,
                   ),
-                  Text("区块链系统-注册",
+                  Text("注册",
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 20,

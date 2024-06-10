@@ -71,7 +71,7 @@ class _TableWidgetState extends State<TableWidget> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: rowData.map((item) {
                           return Container(
-                            width: 200,
+                            width: 210,
                             height: 50,
                             child: Center(child: Text(item.toString())),
                           );
