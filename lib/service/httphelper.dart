@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 
-class HttpHelper{
+class HttpHelper {
   late Dio _dio;
 
-  HttpHelper(){
+  HttpHelper() {
     _dio = Dio(BaseOptions());
   }
 
@@ -17,7 +17,11 @@ class HttpHelper{
       Response response = await _dio.get(url, queryParameters: params);
       return response;
     } catch (e) {
-      return Future.error(e);
+      if (e is DioException && e.response != null) {
+        return e.response!;
+      } else {
+        return Future.error(e);
+      }
     }
   }
 
@@ -31,12 +35,8 @@ class HttpHelper{
       Response response = await _dio.post(url, data: data);
       return response;
     } catch (e) {
-      if (e is DioException) {
-        if (e.response?.statusCode == 403) {
-          return e.response!;
-        } else {
-          return Future.error(e);
-        }
+      if (e is DioException && e.response != null) {
+        return e.response!;
       } else {
         return Future.error(e);
       }
@@ -53,7 +53,11 @@ class HttpHelper{
       Response response = await _dio.delete(url, queryParameters: params);
       return response;
     } catch (e) {
-      return Future.error(e);
+      if (e is DioException && e.response != null) {
+        return e.response!;
+      } else {
+        return Future.error(e);
+      }
     }
   }
 
@@ -72,7 +76,11 @@ class HttpHelper{
       Response response = await _dio.post(url, data: formData);
       return response;
     } catch (e) {
-      return Future.error(e);
+      if (e is DioException && e.response != null) {
+        return e.response!;
+      } else {
+        return Future.error(e);
+      }
     }
   }
 
@@ -94,7 +102,11 @@ class HttpHelper{
         },
       );
     } catch (e) {
-      return Future.error(e);
+      if (e is DioException && e.response != null) {
+        print('Download failed with status code: ${e.response?.statusCode}');
+      } else {
+        return Future.error(e);
+      }
     }
   }
 }

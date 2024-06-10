@@ -112,13 +112,19 @@ class navigatorState extends State<navigator> {
             // enabled: false,
           ),
           PaneItem(
-            icon: const Icon(FluentIcons.boards),
+            icon: const Icon(Icons.usb),
+            title: const Text('查看usb连接情况'),
+            // infoBadge: const InfoBadge(source: Text('8')),
+            body: PnPEntitiesPage(),
+          ),
+          PaneItem(
+            icon: const Icon(Icons.article_outlined),
             title: const Text('查看系统一般日志'),
             // infoBadge: const InfoBadge(source: Text('8')),
             body: NormalLogPage(),
           ),
           PaneItem(
-            icon: const Icon(FluentIcons.disable_updates),
+            icon: const Icon(Icons.security),
             title: const Text('查看系统安全日志'),
             body: SecurityLogPage(),
           ),
