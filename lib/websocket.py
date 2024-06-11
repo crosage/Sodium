@@ -34,7 +34,7 @@ async def send_security_logs(websocket):
     global cnt
     cnt=cnt+1
     print(f"接收到安全日志消息{cnt}")
-    output = run_command('powershell "Get-WinEvent -LogName Security -MaxEvents 100 | ConvertTo-Json"')
+    output = run_command('powershell "Get-WinEvent -LogName Security -MaxEvents 1000 | ConvertTo-Json"')
     security_logs = json.loads(output)
     await websocket.send(json.dumps(security_logs))
     print("完成发送")
@@ -43,7 +43,7 @@ async def send_normal_logs(websocket):
     global cnt
     cnt=cnt+1
     print(f"接收到普通日志消息{cnt}")
-    output = run_command('powershell "Get-WinEvent -LogName Application -MaxEvents 100 | ConvertTo-Json"')
+    output = run_command('powershell "Get-WinEvent -LogName Application -MaxEvents 1000 | ConvertTo-Json"')
     security_logs = json.loads(output)
     await websocket.send(json.dumps(security_logs))
     print("完成发送")

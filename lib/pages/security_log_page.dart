@@ -21,6 +21,15 @@ class _SecurityLogPageState extends State<SecurityLogPage>{
     String dateTime=DateTime.fromMillisecondsSinceEpoch(int.parse(extractedNumber!)).toString();
     return dateTime;
   }
+  Color _getColor(int id) {
+    if (id==4624||id==4625||id==4672||id==4720||id==4722||id==4723) {
+      return Colors.red;
+    } else if(id==4672){
+      return Colors.green;
+    } else {
+      return Colors.white;
+    }
+  }
   @override
   void initState(){
     super.initState();
@@ -122,6 +131,7 @@ class _SecurityLogPageState extends State<SecurityLogPage>{
               separatorBuilder: (BuildContext context, int index) => Divider(), // 分割线
               itemBuilder: (context, index) {
                 return Container(
+                  color: _getColor(filteredList[index]['Id']),
                   child:
                   Expander(
                     header:Row(
